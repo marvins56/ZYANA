@@ -6,11 +6,11 @@ if(!(isset($_SESSION['username']) && isset($_SESSION['email']))){
 }
 $userid = $_SESSION['user_id'];
 
+$idz = $_GET['proid'];
+$decodedUrl = urldecode($idz);
+$proid = $decodedUrl;
 
-
-$id = $_GET['prodid'];
-
-$query1= "SELECT * FROM products where product_id = '$id'";
+$query1= "SELECT * FROM products where product_id = '$proid'";
 $result1 = mysqli_query($conn,$query1);
 
 if ($result1){
@@ -18,20 +18,18 @@ $row = mysqli_fetch_assoc($result1);
 $id = $row['product_id'];
 
 $name = $row['name'];
-$likes = $row['likes'];
-
 $price = $row['price'];
-
 $image = $row['image'];
-
 $description = $row['description'];
-
 
 $sql = "INSERT INTO cart (user_id,product_id,name,image,price) values
 ('$userid','$id','$name','$image','$price')";
 $runquery = mysqli_query($conn,$sql);
 
 if($runquery){
+  echo'<div class="alert alert-success" role="alert">
+ added to cart successfully
+</div>';
 
   header("location:shop.php");
 }

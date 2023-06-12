@@ -18,7 +18,10 @@ $search = "";
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+   
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -123,8 +126,19 @@ $search = "";
                           
                                  if(((isset($_SESSION['user_id']) || isset($_SESSION['username']) || isset($_SESSION['email'])))){
                                     echo('<div class="header__top__right__auth">
-                                    <a href="profile.php"><i class="fa fa-user"></i> '.$_SESSION['username'].'</a>
-                                </div>');
+                                    <a href="profile.php"><i class="fa fa-user"></i> '.$_SESSION['username'].'</a>  
+                                </div>
+                                <span>  | </span>
+                                <div class="header__top__right__auth">
+                                <a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> </a>
+
+                                </div>
+                                '
+                            
+                            
+                            
+                            
+                            );
                                 }else{
                                 echo('<div class="header__top__right__auth">
                                     <a href="login.php"><i class="fa fa-user"></i> Login</a>
@@ -162,7 +176,27 @@ $search = "";
                             <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>
                             <li><a href="cart.php"><i class="fa fa-shopping-bag"></i> <span>
                                 <?php 
-                            include("cartCount.php");
+                           $userid = $_SESSION['user_id'];
+
+                           if((isset($_SESSION['user_id'])) && (isset($_SESSION['username']) && isset($_SESSION['email']))){
+                           
+                                 $query = "SELECT COUNT(cart_id) FROM cart where user_id = $userid ";
+                           
+                               $result = mysqli_query($conn,$query);
+                           
+                               $rows = mysqli_fetch_row($result);
+                           
+                               $total=  $rows[0];
+                           
+                               echo $total;
+                           
+                           }
+                           
+                           else{
+                           
+                             echo 0;
+                           
+                           }
                             ?></span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$0</span></div>
@@ -235,7 +269,7 @@ $search = "";
                     
                     <div class="hero__item set-bg" data-setbg="Admin/'.$image.'">
                     <div class="hero__text">
-                        <span>FRUIT FRESH</span>
+                        <span>Come get your favourite pastries</span>
                         <h2>'.$tile.'<br /></h2>
                         <p>'.$desc.'</p>
                         <a href="shop.php" class="primary-btn">SHOP NOW</a>

@@ -10,7 +10,7 @@ $queryl = "SELECT * from products order by RAND() limit 3";
             $id = $row['product_id'];
 
             $name = $row['name'];
-            $likes = $row['likes'];
+       
            
             $price = $row['price'];
            
@@ -21,7 +21,7 @@ echo('
                          
 
 
-                            <a href="shopDetails.php?proid='.$id.'" class="latest-product__item">
+                            <a href="shopdetails.php?proid='.$id.'" class="latest-product__item">
                             <div class="latest-product__item__pic">
                                 <img src="Admin/'.$image.'" alt="">
                             </div>

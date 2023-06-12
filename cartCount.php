@@ -1,21 +1,13 @@
 
 <?php
+include 'db.php';
+session_start();
 
-if((isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['email']))){
+$userid = $_SESSION['user_id'];
 
-  $sql27 = "SELECT * from users where id = {$_SESSION['id']} ";
+if((isset($_SESSION['user_id'])) && (isset($_SESSION['username']) && isset($_SESSION['email']))){
 
-    $res27 = mysqli_query($conn,$sql27);
-
-    if($res27){
-
-      $rows1 = mysqli_fetch_assoc($res27);
-
-        $username = $rows1['username'];
-
-  }
-
-      $query = "SELECT COUNT(cart_id) FROM cart where user_id = {$_SESSION['id']} ";
+      $query = "SELECT COUNT(cart_id) FROM cart where user_id = $userid ";
 
     $result = mysqli_query($conn,$query);
 
@@ -24,8 +16,6 @@ if((isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['e
     $total=  $rows[0];
 
     echo $total;
-
-
 
 }
 

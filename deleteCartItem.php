@@ -2,17 +2,18 @@
 include('db.php');
 session_start();
 
-$username = $_SESSION['username'];
-if(isset($_GET['deleteid'])){
+$user_id = $_SESSION['user_id'];
 $id = $_GET['deleteid'];
-$query = "DELETE from cart where cart_id ='$id' and username = '$username' ";
+if(($id)){
+
+$query = "DELETE from cart where cart_id ='$id'&& user_id = '$user_id'";
 $result = mysqli_query($conn,$query);
 if($result){
   if(isset($_SESSION['url'])){
   $backlink =  $_SESSION['url'];
   header("location:$backlink");
 }else{
-  header("location:category.php");
+  header("location:shop.php");
 }
 
 }

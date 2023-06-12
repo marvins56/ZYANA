@@ -4,9 +4,9 @@ include('db.php');
 
 session_start();
 
-$id = $_SESSION['id'];
+$id = $_SESSION['user_id'];
 
-$query = "DELETE  from cart where user_id = '$id'";
+$query = "DELETE   from cart where user_id = $id";
 
 $result = mysqli_query($conn,$query);
 

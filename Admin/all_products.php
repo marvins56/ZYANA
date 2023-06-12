@@ -11,7 +11,7 @@
                         <th>PRODUCCT</th>
                         <th>NAME</th>
                         <th>PRICE</th>
-                        <th>CATEGORY</th>
+                      
                         <th>ACTION</th>
                       </tr>
                     </thead>
@@ -22,25 +22,28 @@
           if($result){
             if(mysqli_num_rows($result)> 0){
                 while ($row  = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
-                    $productname = $row['productname'];
-                    $price = $row['price'];
-                    $category = $row['category'];
-    
-                    $description = $row['description'];
-                    $location = $row['location'];
+                  $id = $row['product_id'];
+
+                  $name = $row['name'];
+                
+                  $price = $row['price'];
+               
+                 
+                  $image = $row['image'];
+                 
+                  $description = $row['description'];;
                     echo('
                     <tr>
                     <td>
                 
-                   <img src="'.$location.'"  class="img-fluid avatar avatar-lg me-2cborder-radius-lg" />
+                   <img src="'.$image.'"  class="img-fluid avatar avatar-lg me-2cborder-radius-lg" />
                 
                     </td>
-                    <td>'.$productname.'</td>
+                    <td>'.$name.'</td>
                     <td>
                       '. $price .'
                     </td>
-                    <td><span class="badge bg-label-primary me-1">'. $category.'</span></td>
+               
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
